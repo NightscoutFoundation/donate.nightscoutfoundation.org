@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Donate to the Nightscout Foundation</title>
+  <meta name="description" content="Support the Nightscout Foundation, a 501(c)(3) nonprofit funding the open-source developers behind Nightscout, Loop, Trio and other automated insulin delivery tools.">
+  <link rel="icon" href="https://images.squarespace-cdn.com/content/v1/55f63267e4b0b1dfc5acf418/1442203069181-92NIEDXNKCFH2N60T7VS/ns+foundation+green+text.png?format=100w">
+  <meta property="og:title" content="Donate to the Nightscout Foundation">
+  <meta property="og:description" content="When you choose to give, you become part of something bigger—something powerful.">
+  <meta property="og:image" content="https://images.squarespace-cdn.com/content/v1/55f63267e4b0b1dfc5acf418/1442203069181-92NIEDXNKCFH2N60T7VS/ns+foundation+green+text.png?format=1500w">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green: #2bb673;
+      --green-dark: #1f9a5e;
+      --green-soft: #e8f7ef;
+      --navy: #1b2c4c;
+      --forest: #3b6b4a;
+      --ink: #000;
+      --muted: #444;
+      --line: #d9d9d9;
+      --white: #fff;
+      --radius: 14px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--white);
+      color: var(--ink);
+      font-family: "Poppins", system-ui, sans-serif;
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3 { font-weight: 500; line-height: 1.15; margin: 0; }
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
+    .wrap { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+    .skip { position: absolute; left: -9999px; }
+    .skip:focus { left: 16px; top: 16px; background: var(--white); padding: 8px 12px; z-index: 10; }
+
+    /* Header */
+    header { padding: 24px 0; }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo img { width: 180px; height: auto; }
+    .nav ul { list-style: none; display: flex; gap: 22px; margin: 0; padding: 0; font-size: 15px; font-weight: 400; }
+    .nav a { text-decoration: none; }
+    .nav a:hover, .nav a[aria-current] { text-decoration: underline; text-underline-offset: 4px; }
+
+    /* Hero */
+    .hero { text-align: center; padding: 56px 0 40px; }
+    .hero h1 { font-size: clamp(42px, 7vw, 66px); letter-spacing: -0.01em; }
+    .circled { position: relative; display: inline-block; padding: 0 .12em; }
+    .circled svg { position: absolute; inset: -18% -10% -26% -10%; width: 120%; height: 144%; overflow: visible; pointer-events: none; }
+    .circled path { fill: none; stroke: var(--green); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: draw 1.4s .3s ease-out forwards; }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+    @media (prefers-reduced-motion: reduce) { .circled path { animation: none; stroke-dashoffset: 0; } }
+    .hero p { max-width: 420px; margin: 40px auto 0; font-size: 16px; }
+
+    /* Donate band */
+    .band {
+      position: relative;
+      background: linear-gradient(110deg, var(--navy) 0%, #24405a 45%, var(--forest) 100%);
+      color: var(--white);
+      padding: 80px 0 96px;
+    }
+    .band::before {
+      content: ""; position: absolute; left: 0; right: 0; top: 0; height: 60px;
+      background: radial-gradient(ellipse 75% 100% at 50% 100%, transparent 99%, var(--white) 100%);
+    }
+    .band-grid { display: grid; grid-template-columns: minmax(0, 440px) minmax(0, 1fr); gap: 64px; align-items: center; }
+    .card {
+      background: var(--white); color: var(--ink);
+      border-radius: var(--radius); padding: 36px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.25);
+    }
+    .card h2 { font-size: 22px; margin-bottom: 6px; }
+    .card .sub { font-size: 14px; color: var(--muted); margin: 0 0 22px; }
+    .amounts { border: 0; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+    .amount { grid-column: span 2; }
+    .amount:nth-of-type(n+4) { grid-column: span 3; }
+    .amounts legend { position: absolute; left: -9999px; }
+    .amount input { position: absolute; opacity: 0; pointer-events: none; }
+    .amount span {
+      display: flex; align-items: center; justify-content: center;
+      height: 58px; border: 1.5px solid var(--line); border-radius: 10px;
+      font-size: 19px; font-weight: 500; cursor: pointer;
+      transition: border-color .15s, background .15s, color .15s;
+    }
+    .amount small { font-size: 12px; font-weight: 400; opacity: .7; margin-left: 2px; }
+    .amount span:hover { border-color: var(--green); }
+    .amount input:checked + span { border-color: var(--green); background: var(--green); color: var(--white); }
+    .amount input:focus-visible + span { outline: 3px solid var(--navy); outline-offset: 2px; }
+    .amount.popular span { position: relative; }
+    .amount.popular span::after {
+      content: "Popular"; position: absolute; top: -9px; right: 8px;
+      font-size: 10px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase;
+      background: var(--navy); color: var(--white); padding: 1px 7px; border-radius: 99px;
+    }
+    .impact { min-height: 48px; margin: 18px 0 20px; padding: 12px 14px; background: var(--green-soft); border-radius: 10px; font-size: 14px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--green); color: var(--white);
+      font: 500 17px "Poppins", sans-serif; text-decoration: none;
+      padding: 16px 28px; border: 0; cursor: pointer;
+      transition: background .15s;
+    }
+    .btn:hover { background: var(--green-dark); }
+    .btn:focus-visible { outline: 3px solid var(--navy); outline-offset: 3px; }
+    .btn-block { width: 100%; }
+    .secure { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 14px 0 0; font-size: 12.5px; color: var(--muted); }
+    .other { font-size: 13.5px; text-align: center; margin: 14px 0 0; color: var(--muted); }
+    .band-copy h2 { font-size: clamp(28px, 3.4vw, 38px); margin-bottom: 20px; }
+    .band-copy p { font-size: 17px; margin: 0 0 16px; opacity: .92; }
+    .band-copy .ein { font-size: 14px; opacity: .75; margin-top: 28px; }
+
+    /* Why give */
+    section.why { padding: 110px 0 90px; }
+    .section-title { font-size: clamp(30px, 4vw, 37px); text-align: center; margin-bottom: 56px; }
+    .reasons { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px 40px; }
+    .reason .star { color: var(--green); font-size: 28px; line-height: 1; }
+    .reason h3 { font-size: 22px; margin: 12px 0 10px; }
+    .reason p { margin: 0; font-size: 16px; }
+
+    /* Quotes */
+    section.quotes { background: var(--green-soft); padding: 90px 0; }
+    .quote-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    blockquote { margin: 0; font-size: 21px; font-style: italic; line-height: 1.5; }
+    blockquote footer { font-style: normal; font-size: 15px; margin-top: 14px; color: var(--muted); }
+
+    /* FAQ */
+    section.faq { padding: 90px 0 100px; }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 56px; }
+    .faq h2 { font-size: clamp(30px, 4vw, 37px); }
+    details { border-bottom: 1.5px solid var(--ink); }
+    summary {
+      list-style: none; cursor: pointer; padding: 22px 36px 22px 0; position: relative;
+      font-weight: 400; font-size: 17px;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; position: absolute; right: 4px; top: 50%; transform: translateY(-50%); font-size: 24px; font-weight: 300; }
+    details[open] summary::after { content: "–"; }
+    details p { margin: 0 0 22px; font-size: 16px; }
+
+    /* Footer */
+    .site-footer { padding: 40px 0 80px; font-style: italic; font-size: 14.5px; }
+    .site-footer p { max-width: 640px; margin: 0 auto 36px; }
+    .site-footer .center { text-align: center; }
+
+    @media (max-width: 960px) {
+      .nav ul { display: none; }
+      .band-grid { grid-template-columns: 1fr; gap: 48px; }
+      .card { max-width: 480px; margin: 0 auto; width: 100%; }
+      .band-copy { text-align: center; }
+      .reasons { grid-template-columns: 1fr 1fr; }
+      .faq-grid { grid-template-columns: 1fr; gap: 16px; }
+    }
+    @media (max-width: 640px) {
+      .wrap { padding: 0 16px; }
+      .hero { padding: 32px 0 24px; }
+      .card { padding: 26px 20px; }
+      .reasons, .quote-grid { grid-template-columns: 1fr; }
+      section.why { padding: 80px 0 60px; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#donate">Skip to donation form</a>
+
+  <header>
+    <div class="wrap nav">
+      <a class="logo" href="https://www.nightscoutfoundation.org/">
+        <img src="https://images.squarespace-cdn.com/content/v1/55f63267e4b0b1dfc5acf418/1442203069181-92NIEDXNKCFH2N60T7VS/ns+foundation+green+text.png?format=500w" alt="The Nightscout Foundation" width="180" height="54">
+      </a>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="https://www.nightscoutfoundation.org/how-you-can-help">get involved</a></li>
+          <li><a href="https://www.nightscoutfoundation.org/about">about</a></li>
+          <li><a href="https://www.nightscoutfoundation.org/faqs">resources</a></li>
+          <li><a href="https://www.nightscoutfoundation.org/new-events">community</a></li>
+          <li><a href="./" aria-current="page">give</a></li>
+          <li><a href="https://www.nightscoutfoundation.org/contact">contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <h1>Make an<br>
+          <span class="circled">impact<svg viewBox="0 0 300 120" preserveAspectRatio="none" aria-hidden="true"><path d="M250 20 C 200 4, 90 4, 40 22 C -5 40, 5 92, 80 104 C 160 116, 270 106, 292 72 C 308 44, 270 20, 210 14 C 170 10, 120 12, 96 16"/></svg></span> today
+        </h1>
+        <p>When you choose to give, you become part of something bigger—something powerful.</p>
+      </div>
+    </section>
+
+    <section class="band" id="donate">
+      <div class="wrap band-grid">
+        <form class="card" id="donate-form" action="#" novalidate>
+          <h2>Become a monthly supporter</h2>
+          <p class="sub">Recurring monthly gift · cancel anytime</p>
+          <fieldset class="amounts">
+            <legend>Monthly donation amount</legend>
+            <label class="amount"><input type="radio" name="amount" value="10"><span>$10<small>/mo</small></span></label>
+            <label class="amount"><input type="radio" name="amount" value="15"><span>$15<small>/mo</small></span></label>
+            <label class="amount popular"><input type="radio" name="amount" value="20" checked><span>$20<small>/mo</small></span></label>
+            <label class="amount"><input type="radio" name="amount" value="50"><span>$50<small>/mo</small></span></label>
+            <label class="amount"><input type="radio" name="amount" value="100"><span>$100<small>/mo</small></span></label>
+          </fieldset>
+          <p class="impact" id="impact" aria-live="polite"></p>
+          <button class="btn btn-block" type="submit" id="donate-btn">Give $20 monthly</button>
+          <p class="secure">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+            Secure checkout powered by Stripe
+          </p>
+          <p class="other">Prefer a one-time gift, a different amount, or to give in honor of someone? <a href="https://www.nightscoutfoundation.org/contact">Contact us</a>.</p>
+        </form>
+
+        <div class="band-copy">
+          <h2>Fuel the people building open-source diabetes tools</h2>
+          <p>Your funds support bringing together the brightest developers who continue volunteering their time and talent to create incredible AID Systems.</p>
+          <p>Please donate so the Nightscout Foundation can provide travel expenses and conference space for these selfless developers.</p>
+          <p class="ein">The Nightscout Foundation is a US IRS recognized 501(c)(3) organization. Tax EIN <span style="white-space:nowrap">47-2130306</span>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="why">
+      <div class="wrap">
+        <h2 class="section-title">Why give?</h2>
+        <div class="reasons">
+          <div class="reason"><div class="star" aria-hidden="true">✽</div><h3>Make A Difference</h3><p>Your donation helps create real, measurable change in the lives of those we serve: children, adults, and families affected by Type 1 Diabetes.</p></div>
+          <div class="reason"><div class="star" aria-hidden="true">✽</div><h3>Support A Cause You Love</h3><p>Give back to the work that aligns with your values and passions - to make managing diabetes easier and better.</p></div>
+          <div class="reason"><div class="star" aria-hidden="true">✽</div><h3>Be Part of A Solution</h3><p>Support the community of people working together to create important solutions to management of diabetes.</p></div>
+          <div class="reason"><div class="star" aria-hidden="true">✽</div><h3>Create Lasting Impact</h3><p>Your contribution helps build long-term solutions that improve the lives of families affected by T1D.</p></div>
+          <div class="reason"><div class="star" aria-hidden="true">✽</div><h3>Fund Impactful Work</h3><p>Support hands-on efforts that make a difference where it matters most - improving the lives of people with Type 1 Diabetes.</p></div>
+          <div class="reason"><div class="star" aria-hidden="true">✽</div><h3>Inspire Others</h3><p>Your generosity can motivate friends, family, and colleagues to do the same.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quotes">
+      <div class="wrap">
+        <h2 class="section-title">What People Are Saying</h2>
+        <div class="quote-grid">
+          <blockquote>“Managing diabetes on a daily basis has never been easier in the 54 years I’ve had Type 1 Diabetes.”<footer>— Loop and Trio User</footer></blockquote>
+          <blockquote>“We were incredibly worried about our child’s care while at school. With the Nightscout Application, it turned out to be a non-issue. Thank you.”<footer>— Parent of a child with Type 1 Diabetes</footer></blockquote>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="faq">
+      <div class="wrap faq-grid">
+        <h2>Frequently Asked Questions</h2>
+        <div>
+          <details>
+            <summary>Is my donation tax-deductible?</summary>
+            <p>The Nightscout Foundation is a designated 501(c)(3) organization that allows you to make tax deductible donations. Please check with your tax advisor for complete details.</p>
+          </details>
+          <details>
+            <summary>How do monthly donations work? Can I cancel?</summary>
+            <p>Your card is charged the amount you choose once a month, starting today, until you cancel. You can cancel at any time — just <a href="https://www.nightscoutfoundation.org/contact">contact us</a> and we'll stop future payments.</p>
+          </details>
+          <details>
+            <summary>Where does my donation go?</summary>
+            <p>Your donation will be used to support the programmers around the world who are making a difference in the lives of people with Type 1 Diabetes. Your donation(s) will be used to allow the developers to attend conferences and for providing tools that are needed as they create new solutions for managing diabetes.</p>
+          </details>
+          <details>
+            <summary>Can I volunteer or get more involved?</summary>
+            <p>Volunteers are always welcome to support users of the Nightscout-funded tools through the online support groups. Volunteers are also appreciated when conferences are held around the world for helping developers find their way around. We appreciate you!</p>
+          </details>
+          <details>
+            <summary>Do you accept in-kind donations?</summary>
+            <p>At times, we are asked by developers to provide insulin pumps or other equipment they need for testing purposes. Please keep an eye out through the Facebook support groups and via our irregular newsletters.</p>
+          </details>
+          <details>
+            <summary>Can I donate in honor or in memory of someone?</summary>
+            <p>Yes! After you donate, please <a href="https://www.nightscoutfoundation.org/contact">contact us</a> with the honoree or memorial name, and the name and email address of the person we should notify.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p class="center">The Nightscout Foundation is a US IRS Recognized 501(c)3 Organization, and contributions are deductible as allowed by US Tax Code. Consult your tax professional for full details. Our Tax EIN is 47-2130306.</p>
+      <p>While Foundation supported Open Source projects may interface with and utilize functionality of commercially available systems, the Nightscout Foundation does not have any type of affiliation or receive funding from any of the corporations mentioned. These companies include Dexcom (G6, G7, Follow), Insulet (Omnipod Dash, O5), Tandem (T-slim pumps), Medtronic/Minimed, BetaBionics (iLet), Sequel (Twiist), Abbott (Libre), Senseonics (Eversense), and any other commercially available products.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Stripe Payment Links, one monthly subscription per preset amount
+    const LINKS = {
+      10: "https://buy.stripe.com/14A9AV4Gm9Dh1ribpXgIo02",
+      15: "https://buy.stripe.com/00waEZdcS5n1gmc79HgIo04",
+      20: "https://buy.stripe.com/cNifZj4Gm3eT3zqeC9gIo01",
+      50: "https://buy.stripe.com/4gMcN78WC8zdda01PngIo00",
+      100: "https://buy.stripe.com/6oUaEZ2ye8zd3zq51zgIo03"
+    };
+    const IMPACT = {
+      10: "$10 a month — $120 a year — helps support the volunteer developers behind Nightscout's open-source tools.",
+      15: "$15 a month — $180 a year — helps provide the tools developers need as they create new solutions.",
+      20: "$20 a month — $240 a year — helps bring volunteer developers together to collaborate.",
+      50: "$50 a month — $600 a year — goes toward travel and conference space for these developers.",
+      100: "$100 a month — $1,200 a year — makes a lasting difference for the people building these tools."
+    };
+
+    const form = document.getElementById("donate-form");
+    const btn = document.getElementById("donate-btn");
+    const impact = document.getElementById("impact");
+
+    function selected() {
+      return form.querySelector('input[name="amount"]:checked').value;
+    }
+    function update() {
+      const amt = selected();
+      btn.textContent = "Give $" + amt + " monthly";
+      impact.textContent = IMPACT[amt];
+    }
+
+    // Allow linking straight to an amount, e.g. ?amount=20
+    const preset = new URLSearchParams(location.search).get("amount");
+    if (preset && LINKS[preset]) form.querySelector('input[value="' + preset + '"]').checked = true;
+
+    form.addEventListener("change", update);
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      window.location.href = LINKS[selected()];
+    });
+    update();
+  </script>
+</body>
+</html>
