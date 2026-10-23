@@ -84,7 +84,13 @@
     .amounts { border: 0; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
     .amount { grid-column: span 2; }
     .amount:nth-of-type(n+4) { grid-column: span 3; }
-    .amounts legend { position: absolute; left: -9999px; }
+    .amounts legend, .freq legend { position: absolute; left: -9999px; }
+    .amounts[hidden] { display: none; }
+    .freq { border: 0; margin: 0 0 24px; padding: 4px; display: grid; grid-template-columns: 1fr 1fr; background: #f1f1f1; border-radius: 99px; }
+    .freq input { position: absolute; opacity: 0; pointer-events: none; }
+    .freq span { display: block; text-align: center; padding: 9px 0; border-radius: 99px; font-size: 15px; font-weight: 500; cursor: pointer; transition: background .15s, color .15s; }
+    .freq input:checked + span { background: var(--navy); color: var(--white); }
+    .freq input:focus-visible + span { outline: 3px solid var(--green); outline-offset: 2px; }
     .amount input { position: absolute; opacity: 0; pointer-events: none; }
     .amount span {
       display: flex; align-items: center; justify-content: center;
@@ -203,9 +209,14 @@
     <section class="band" id="donate">
       <div class="wrap band-grid">
         <form class="card" id="donate-form" action="#" novalidate>
-          <h2>Become a monthly supporter</h2>
-          <p class="sub">Recurring monthly gift · cancel anytime</p>
-          <fieldset class="amounts">
+          <fieldset class="freq">
+            <legend>Donation frequency</legend>
+            <label><input type="radio" name="frequency" value="monthly" checked><span>Monthly</span></label>
+            <label><input type="radio" name="frequency" value="once"><span>One-time</span></label>
+          </fieldset>
+          <h2 id="card-title">Become a monthly supporter</h2>
+          <p class="sub" id="card-sub">Recurring monthly gift · cancel anytime</p>
+          <fieldset class="amounts" id="amounts">
             <legend>Monthly donation amount</legend>
             <label class="amount"><input type="radio" name="amount" value="10"><span>$10<small>/mo</small></span></label>
             <label class="amount"><input type="radio" name="amount" value="15"><span>$15<small>/mo</small></span></label>
@@ -219,7 +230,7 @@
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
             Secure checkout powered by Stripe
           </p>
-          <p class="other">Prefer a one-time gift, a different amount, or to give in honor of someone? <a href="https://www.nightscoutfoundation.org/contact">Contact us</a>.</p>
+          <p class="other">Want to give in honor or memory of someone? <a href="https://www.nightscoutfoundation.org/contact">Contact us</a>.</p>
         </form>
 
         <div class="band-copy">
@@ -317,23 +328,45 @@
     const btn = document.getElementById("donate-btn");
     const impact = document.getElementById("impact");
 
+    // One-time gifts use a single Stripe link where the donor enters any amount
+    const ONE_TIME_LINK = "https://donate.stripe.com/eVqaEZ5KqeXBgmc0LjgIo07";
+    const amounts = document.getElementById("amounts");
+    const title = document.getElementById("card-title");
+    const sub = document.getElementById("card-sub");
+
     function selected() {
       return form.querySelector('input[name="amount"]:checked').value;
     }
+    function isOnce() {
+      return form.querySelector('input[name="frequency"]:checked').value === "once";
+    }
     function update() {
+      if (isOnce()) {
+        amounts.hidden = true;
+        title.textContent = "Make a one-time gift";
+        sub.textContent = "Give once, in any amount you choose";
+        impact.textContent = "You'll enter your donation amount on the next page. Every gift, large or small, helps support the volunteer developers behind Nightscout's open-source tools.";
+        btn.textContent = "Give once";
+        return;
+      }
       const amt = selected();
+      amounts.hidden = false;
+      title.textContent = "Become a monthly supporter";
+      sub.textContent = "Recurring monthly gift · cancel anytime";
       btn.textContent = "Give $" + amt + " monthly";
       impact.textContent = IMPACT[amt];
     }
 
-    // Allow linking straight to an amount, e.g. ?amount=20
-    const preset = new URLSearchParams(location.search).get("amount");
+    // Allow linking straight to an option, e.g. ?amount=20 or ?type=once
+    const params = new URLSearchParams(location.search);
+    const preset = params.get("amount");
     if (preset && LINKS[preset]) form.querySelector('input[value="' + preset + '"]').checked = true;
+    if (params.get("type") === "once") form.querySelector('input[value="once"]').checked = true;
 
     form.addEventListener("change", update);
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      window.location.href = LINKS[selected()];
+      window.location.href = isOnce() ? ONE_TIME_LINK : LINKS[selected()];
     });
     update();
   </script>
