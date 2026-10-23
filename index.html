@@ -86,6 +86,18 @@
     .amount:nth-of-type(n+4) { grid-column: span 3; }
     .amounts legend, .freq legend { position: absolute; left: -9999px; }
     .amounts[hidden] { display: none; }
+    .program { margin: 0 0 20px; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+    .program-label { margin: 0 0 10px; font-size: 14px; font-weight: 400; }
+    .program-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .program-opt {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      height: 46px; border: 1.5px solid var(--line); border-radius: 10px;
+      font-size: 15px; font-weight: 500; text-decoration: none;
+      transition: border-color .15s;
+    }
+    .program-opt[aria-current] { border-color: var(--green); background: var(--green-soft); }
+    a.program-opt:hover { border-color: var(--green); }
+    a.program-opt:focus-visible { outline: 3px solid var(--navy); outline-offset: 2px; }
     .freq { border: 0; margin: 0 0 24px; padding: 4px; display: grid; grid-template-columns: 1fr 1fr; background: #f1f1f1; border-radius: 99px; }
     .freq input { position: absolute; opacity: 0; pointer-events: none; }
     .freq span { display: block; text-align: center; padding: 9px 0; border-radius: 99px; font-size: 15px; font-weight: 500; cursor: pointer; transition: background .15s, color .15s; }
@@ -209,6 +221,13 @@
     <section class="band" id="donate">
       <div class="wrap band-grid">
         <form class="card" id="donate-form" action="#" novalidate>
+          <div class="program">
+            <p class="program-label">Select which program to support</p>
+            <div class="program-opts">
+              <span class="program-opt" aria-current="true">General Fund</span>
+              <a class="program-opt" href="https://donate.hackdiabetes.io">HackDiabetes <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
           <fieldset class="freq">
             <legend>Donation frequency</legend>
             <label><input type="radio" name="frequency" value="monthly" checked><span>Monthly</span></label>
